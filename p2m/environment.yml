@@ -1,0 +1,43 @@
+#####################################
+##  SETUP ANACONDA WITH PYTORCH-3D ##
+#####################################
+
+
+1. Install Anaconda
+2. Create a venv in anaconda with python 3.9
+conda create --n p2m-py9 python=3.9
+3. Add conda-forge to Anaconda installation channels:
+conda config --append channels conda-forge
+4. Install PyTorch 1.10.0 and corresponding TorchVision for CUDA 11.3 (though we have CUDA compatibility level 11.6 on the GeoAI server)
+conda install pytorch=1.10.0 torchvision torchaudio cudatoolkit=11.3 -c pytorch -c conda-forge
+5. Install FvCore and IoPath from PIP
+pip install fvcore iopath
+6. Install PyTorch3D (find the relevant link from this site : https://conda.anaconda.org/pytorch3d/linux-64 and do "conda install")
+conda install https://conda.anaconda.org/pytorch3d/linux-64/pytorch3d-0.6.1-py39_cu113_pyt1100.tar.bz2
+
+---------------
+
+############################
+## Setup Manifold Library ##
+############################
+
+(For more info, check this link : https://github.com/hjwdzh/Manifold)
+
+1. git clone --recursive -j8 git://github.com/hjwdzh/Manifold
+2. cd Manifold
+3. mkdir build
+4. cd build
+5. cmake .. -DCMAKE_BUILD_TYPE=Release
+make
+6. Add the Manifold build directory path to "options,py" in Point2Mesh.
+
+-------------------------------------
+
+REFERENCES
+
+1. Conda PyTorch3D RepoData : https://conda.anaconda.org/pytorch3d/linux-64
+2. Github Issue Answer (PyTorch3d, glibc error) : https://github.com/facebookresearch/pytorch3d/issues/1076#issuecomment-1043431615
+3. Adding conda-forge channel : https://stackoverflow.com/questions/48493505/packagesnotfounderror-the-following-packages-are-not-available-from-current-cha
+4. Setting Up Manifold : https://github.com/hjwdzh/Manifold
+5. Official instructions for PyTorch3D setup : https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md
+6. Instructions for Point2Mesh setup : https://github.com/ranahanocka/point2mesh
